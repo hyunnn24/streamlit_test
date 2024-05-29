@@ -37,7 +37,7 @@ def drawing():
     client = OpenAI(api_key=st.session_state.API)
     response = client.images.generate(model="dall-e-3",prompt=pprompt)
     image_url = response.data[0].url
-    st.markdown("![alt text](image_url)") # 웹 이미지 보여주기
+    
     st.image(image_url)
   
 
