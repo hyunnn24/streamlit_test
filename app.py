@@ -3,9 +3,10 @@ import streamlit as st
 page = st.sidebar.selectbox("페이지 선택", ["API", "챗봇", "그림"])
 
 if page == "챗봇":
-    chating()
+  chating()
+
 if page == "APIINPUT":
-    APIINPUT()
+  APIINPUT()
 
 def APIINPUT():
   st.header("API Key 를 입력하세요")
