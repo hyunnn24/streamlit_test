@@ -1,13 +1,16 @@
 import streamlit as st
 
-page = st.sidebar.selectbox("페이지 선택", ["챗봇", "페이지 1", "페이지 2"])
+page = st.sidebar.selectbox("페이지 선택", ["API", "챗봇", "그림"])
 
 if page == "챗봇":
     chating()
+if page == "APIINPUT":
+  APIINPUT()
 
-st.header("API Key 를 입력하세요")
-API=st.text_input("API", type="password")
-st.session_state.API
+def APIINPUT():
+  st.header("API Key 를 입력하세요")
+  API=st.text_input("API", type="password")
+  st.session_state.API
 
 def chating():
   st.header("무엇이든 물어보세요.")
@@ -28,7 +31,3 @@ def chating():
   with st.chat_message("AI"):
       st.write(response.choices[0].message.content)
 
-page = st.sidebar.selectbox("페이지 선택", ["챗봇", "페이지 1", "페이지 2"])
-
-if page == "챗봇":
-    chating()
