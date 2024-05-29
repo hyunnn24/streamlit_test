@@ -1,9 +1,9 @@
 import streamlit as st
 
 st.header("API Key 를 입력하세요")
-API = st.text_input("API KEY?")
 st.text_input("API_keys", key=API)
 
+API =API_keys
 st.header("무엇이든 물어보세요.")
 prompt = st.text_input("질문?")
 
