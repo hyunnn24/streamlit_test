@@ -1,5 +1,10 @@
 import streamlit as st
 
+page = st.sidebar.selectbox("페이지 선택", ["챗봇", "페이지 1", "페이지 2"])
+
+if page == "챗봇":
+    chating()
+
 st.header("API Key 를 입력하세요")
 API=st.text_input("API", type="password")
 st.session_state.API
