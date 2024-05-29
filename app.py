@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.header("API Key 를 입력하세요")
-st.text_input(label, type="password")
+st.text_input("API", type="password")
 
 st.header("무엇이든 물어보세요.")
 prompt = st.text_input("질문?")
