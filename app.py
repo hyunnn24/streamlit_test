@@ -29,7 +29,16 @@ def chating():
         st.write("API Key를 먼저 입력하세요.")
 
 def drawing():
-    st.header("그림을 그리는 페이지")
+    
+    st.header("무엇이든 그려보세요.")
+    pprompt = st.text_input("프롬프트?")
+
+    from openai import OpenAI
+    client = OpenAI(api_key=API)
+    response = client.images.generate(model="dall-e-3",prompt=pprompt)
+    image_url = response.data[0].url
+    st.markdown("![alt text](image_url)") # 웹 이미지 보여주기
+    st.image(image_url)
   
 
 
