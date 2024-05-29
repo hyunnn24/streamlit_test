@@ -5,6 +5,8 @@ API=st.text_input("API", type="password")
 
 st.header("무엇이든 물어보세요.")
 prompt = st.text_input("질문?")
+st.session_state.API
+
 
 from openai import OpenAI
 client = OpenAI(api_key=API)
