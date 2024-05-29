@@ -1,7 +1,7 @@
 import streamlit as st
 
-!pip install -q streamlit openai
-!npm install localtunnel
+pip install -q streamlit openai
+npm install localtunnel
 
 import streamlit as st
 
