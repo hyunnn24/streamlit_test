@@ -14,7 +14,7 @@ def chating():
     
     if prompt and 'API' in st.session_state:
         client = OpenAI(api_key=st.session_state.API)
-        response = client.chat_completions.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
