@@ -20,7 +20,7 @@ def run_and_wait(client, assistant, thread):
     return run
 
 def APIINPUT():
-    st.header("API Key 를 입력하세요")
+    st.header("API Key를 입력하세요")
     API = st.text_input("API", type="password")
     if API:
         st.session_state.API = API
@@ -57,12 +57,12 @@ def drawing():
     else:
         st.write("API Key를 먼저 입력하세요.")
 
-def chatting():
+def chatting(user_input):
     if 'API' in st.session_state:
         client = OpenAI(api_key=st.session_state.API)
         assistant = client.beta.assistants.create(
             name="streamlit",
-            description="you are an helpful assistant",
+            description="You are a helpful assistant",
             model="gpt-4o",
             tools=[{"type": "code_interpreter"}]
         )
@@ -70,14 +70,16 @@ def chatting():
             messages=[
                 {
                     "role": "user",
-                    "content": st.text_input("유저 입력")
+                    "content": user_input
                 }
             ]
         )
         run = run_and_wait(client, assistant, thread)
         thread_messages = client.beta.threads.messages.list(thread.id)
         for msg in thread_messages.data:
-            st.write(f"{msg.role}: {msg.content[0]}")
+            role = msg.role
+            content = msg.content[0]
+            st.write(f"{role}: {content}")
     else:
         st.write("API Key를 먼저 입력하세요.")
 
@@ -90,4 +92,5 @@ elif page == "챗봇":
 elif page == "그림":
     drawing()
 elif page == "Chat":
-    chatting()
+    user_input = st.text_input("Your message:")
+    chatting(user_input)
