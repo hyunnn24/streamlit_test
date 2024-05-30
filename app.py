@@ -41,54 +41,7 @@ def drawing():
     st.image(image_url)
 
 def chatting():
-    import time
-
-    def run_and_wait(client, assistant, thread):
-    run = client.beta.threads.runs.create(
-        thread_id=thread.id,
-        assistant_id=assistant.id
-    )
-    while True:
-        run_check = client.beta.threads.runs.retrieve(
-        thread_id=thread.id,
-        run_id=run.id
-        )
-        print(run_check.status)
-        if run_check.status in ['queued','in_progress']:
-        time.sleep(2)
-        else:
-        break
-    return run
-
-    client = OpenAI(api_key="sk-")
-
-    assistant = client.beta.assistants.create(
-    name="assistant",
-    description="you are an helpful assistant.",
-    model="gpt-4o",
-    tools=[{"type": "code_interpreter"}]
-    )
-
-    thread = client.beta.threads.create(
-    messages=[
-        {
-        "role": "user",
-        "content": prompt
-        
-        }
-    ]
-    )
-
-
-    run = run_and_wait(client, assistant, thread)
-
-    for i,run_step in enumerate(run_steps.data):
-    print(f"{i}: {run_step.type}: {run_step.step_details}")
-    if run_step.step_details.type == 'tool_calls':
-        for tool_call in run_step.step_details.tool_calls:
-        print(f"- Tool Call: {tool_call.type}")
-        print(f"- Input: {tool_call.code_interpreter.input}")
-        print(f"- Output: {tool_call.code_interpreter.outputs}")
+    
   
 
 
