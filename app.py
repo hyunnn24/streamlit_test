@@ -60,7 +60,7 @@ def drawing():
 def chatting():
     if 'API' in st.session_state:
         client = OpenAI(api_key=st.session_state.API)
-        assistant = client.chat.assistants.create(
+        assistant = client.beta.assistants.create(
             name="streamlit",
             description="you are an helpful assistant",
             model="gpt-4o",
