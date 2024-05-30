@@ -46,7 +46,7 @@ def chating():
     else:
         st.write("API Key를 먼저 입력하세요.")
 
-assistant = client.beta.assistants.create(
+assistant = client.chat.assistants.create(
   name="streamlit",
   description="you are an helpful assistant",
   model="gpt-4o",
