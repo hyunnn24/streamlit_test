@@ -47,20 +47,20 @@ def chating():
         st.write("API Key를 먼저 입력하세요.")
 
 assistant = client.chat.assistants.create(
-  name="streamlit",
-  description="you are an helpful assistant",
-  model="gpt-4o",
-  tools=[{"type": "code_interpreter"}]
+    name="streamlit",
+    description="you are an helpful assistant",
+    model="gpt-4o",
+    tools=[{"type": "code_interpreter"}]
 )
 
 thread = client.beta.threads.create(
-  messages=[
+    messages=[
     {
       "role": "user",
       "content": userinput
       
     }
-  ]
+    ]
 )
 
 
