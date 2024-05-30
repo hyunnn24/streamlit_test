@@ -80,7 +80,10 @@ def chatting():
         run = run_and_wait(client, assistant, thread)
         thread_messages = client.beta.threads.messages.list(thread.id)
         for msg in thread_messages.data:
-            st.write(f"{msg['role']}: {msg['content']}")
+            # 메시지의 구조를 확인하고 적절히 접근합니다.
+            role = msg.get('role', 'unknown role')
+            content = msg.get('content', 'no content')
+            st.write(f"{role}: {content}")
 
 page = st.sidebar.selectbox("페이지 선택", ["API", "챗봇", "그림", "Chat"])
 
