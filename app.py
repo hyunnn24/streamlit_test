@@ -63,7 +63,7 @@ def chatting():
     
     if user_input and 'API' in st.session_state:
         client = OpenAI(api_key=st.session_state.API)
-        assistant = client.beta.assistants.create(
+        assistant = client.chat.assistants.create(
             name="streamlit",
             description="you are a helpful assistant",
             model="gpt-4o",
@@ -80,9 +80,10 @@ def chatting():
         run = run_and_wait(client, assistant, thread)
         thread_messages = client.beta.threads.messages.list(thread.id)
         for msg in thread_messages.data:
-            # 메시지의 구조를 확인하고 적절히 접근합니다.
-            role = msg.get('role', 'unknown role')
-            content = msg.get('content', 'no content')
+            role = getattr(msg, 'role', 'unknown role')
+            content = getattr(msg, 'content', 'no content')
+            if isinstance(content, list):
+                content = " ".join(content)
             st.write(f"{role}: {content}")
 
 page = st.sidebar.selectbox("페이지 선택", ["API", "챗봇", "그림", "Chat"])
