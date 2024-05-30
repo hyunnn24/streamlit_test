@@ -84,7 +84,7 @@ def chatting():
     run = run_and_wait(client, assistant, thread)
     thread_messages = client.beta.threads.messages.list(thread.id)
     for msg in thread_messages.data:
-    print(f"{msg.role}: {msg.content[0]}")
+        print(f"{msg.role}: {msg.content[0]}")
 
 
 page = st.sidebar.selectbox("페이지 선택", ["API", "챗봇", "그림","Chat"])
