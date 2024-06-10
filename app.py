@@ -40,8 +40,8 @@ def chating():
         )
         with st.chat_message("AI"):
             st.write(response.choices[0].message.content)
-    elif not prompt:
-        st.write("질문을 입력하세요.")
+    elif not prompt and 'API' in st.session_state:
+        st.write("프롬프트를 입력하세요")
     else:
         st.write("API Key를 먼저 입력하세요.")
 
