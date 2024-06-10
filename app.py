@@ -25,8 +25,8 @@ def APIINPUT():
     if API:
         st.session_state.API = API
 
-        
-    if 'API' in session_state:
+
+    if 'API' in st.session_state:
         st.write("API상태: 입력됨")
     else:
         st.write("API상태: 입력안됨")
