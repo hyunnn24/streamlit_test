@@ -49,7 +49,7 @@ def drawing():
     st.header("무엇이든 그려보세요.")
     pprompt = st.text_input("프롬프트?")
     
-    if 'API' in st.session_state:
+    if 'API' in st.session_state and pprompt:
         client = OpenAI(api_key=st.session_state.API)
         response = client.images.generate(model="dall-e-3", prompt=pprompt)
         image_url = response.data[0].url
