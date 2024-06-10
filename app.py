@@ -49,37 +49,44 @@ def drawing():
     st.header("무엇이든 그려보세요.")
     pprompt = st.text_input("프롬프트?")
     
-    if 'API' in st.session_state and pprompt:
-        client = OpenAI(api_key=st.session_state.API)
-        response = client.images.generate(model="dall-e-3", prompt=pprompt)
-        image_url = response.data[0].url
-        st.image(image_url)
+    if 'API' in st.session_state:
+        if pprompt:
+
+            client = OpenAI(api_key=st.session_state.API)
+            response = client.images.generate(model="dall-e-3", prompt=pprompt)
+            image_url = response.data[0].url
+            st.image(image_url)
+        else:
+            st.write("프롬프트를 입력하세요")
     else:
         st.write("API Key를 먼저 입력하세요.")
 
 def chatting(user_input):
-    if 'API' in st.session_state and user_input:
-        client = OpenAI(api_key=st.session_state.API)
-        assistant = client.beta.assistants.create(
-            name="streamlit",
-            description="You are a helpful assistant",
-            model="gpt-4o",
-            tools=[{"type": "code_interpreter"}]
-        )
-        thread = client.beta.threads.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": user_input
-                }
-            ]
-        )
-        run = run_and_wait(client, assistant, thread)
-        thread_messages = client.beta.threads.messages.list(thread.id)
-        for msg in thread_messages.data:
-            role = msg.role
-            content = msg.content[0]
-            st.write(f"{role}: {content}")
+    if 'API' in st.session_state:
+        if user_input:
+            client = OpenAI(api_key=st.session_state.API)
+            assistant = client.beta.assistants.create(
+                name="streamlit",
+                description="You are a helpful assistant",
+                model="gpt-4o",
+                tools=[{"type": "code_interpreter"}]
+            )
+            thread = client.beta.threads.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": user_input
+                    }
+                ]
+            )
+            run = run_and_wait(client, assistant, thread)
+            thread_messages = client.beta.threads.messages.list(thread.id)
+            for msg in thread_messages.data:
+                role = msg.role
+                content = msg.content[0]
+                st.write(f"{role}: {content}")
+        else:
+            st.write("프롬프트를 입력하세요")
     else:
         st.write("API Key를 먼저 입력하세요.")
 
