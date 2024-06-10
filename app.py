@@ -25,6 +25,12 @@ def APIINPUT():
     if API:
         st.session_state.API = API
 
+        
+    if 'API' in session_state:
+        st.write("API상태: 입력됨")
+    else:
+        st.write("API상태: 입력안됨")
+
 def chating():
     st.header("무엇이든 물어보세요.")
     prompt = st.text_input("질문?")
