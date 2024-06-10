@@ -58,7 +58,7 @@ def drawing():
         st.write("API Key를 먼저 입력하세요.")
 
 def chatting(user_input):
-    if 'API' in st.session_state:
+    if 'API' in st.session_state and user_input:
         client = OpenAI(api_key=st.session_state.API)
         assistant = client.beta.assistants.create(
             name="streamlit",
